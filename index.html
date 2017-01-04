@@ -1,0 +1,59 @@
+<html>
+<head>
+<style>
+
+html {
+  font-size: 17px;
+}
+@media (max-width: 900px) {
+  html { font-size: 15px; }
+}
+@media (max-width: 400px) {
+  html { font-size: 13px; }
+}
+
+.container {
+  display: flex; /* or inline-flex */
+  flex-direction: column;
+  width:100%;
+  text-align:center;
+  font-size:2rem;
+}
+h1 {
+  color: white;
+}
+.container a, .container a:visited, .container a:hover {
+  color: white;
+  text-decoration: none;
+  font-family: 'Double','Times','Gerogia','serif';
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+}
+.station {
+  margin:10px;
+  min-height: 50px;
+  border: 1px solid white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+body {
+  background-color:#080808;
+  font-family: 'Double','Times','Gerogia','serif';
+  color: inherit;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Radio</h1>
+<div class="station"><a href="/npr">Vermont Public Radio Classic</a></div>
+<div class="station"><a href="/rcan">Radio Canada Premi&egrave;re</a></div>
+<div class="station"><a href="/stop">Stop</a></div>
+</div>
+</body>
+</html>
