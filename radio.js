@@ -1,10 +1,13 @@
 const       PORT = 1111;
 
-const       util = require('util'),
+const       util = require('util');
 const       http = require('http');
-const fileSystem = require('fs'),
-const      spawn = require('child_process').spawn,
+const fileSystem = require('fs');
+const      spawn = require('child_process').spawn;
 const       exec = require('child_process').exec;
+
+const   stations = [{"path":"/rcan","caption":"Radio-Canaada Premiere","url":"http://2qmtl0.akacast.akamaistream.net/7/953/177387/v1/rc.akacast.akamaistream.net/2QMTL0"},
+                    {"path":"/npr", "caption":"Vermont Public Radio Classic","url":"http://vprclassical.streamguys.net/vprclassical64.aac"}];
 
 var proc = null;
 
@@ -12,10 +15,14 @@ function handleRequest(request, response) {
 
   var station = null;
 
-  if (request.url == "/npr") 
-    station = "http://vprclassical.streamguys.net/vprclassical128.mp3";
-  if (request.url == "/rcan") 
-    station = "http://2qmtl0.akacast.akamaistream.net/7/953/177387/v1/rc.akacast.akamaistream.net/2QMTL0";
+  var arrayLength = stations.length;
+  for (var i = 0; i < arrayLength; i++) {
+    if (request.url == stations[i].path) {
+      console.log(stations[i].path);
+      station = stations[i];
+      break;
+    }
+  }
 
   if (request.url == "/stop" || station != null) {
     if (proc != null) {
@@ -31,7 +38,8 @@ function handleRequest(request, response) {
   }
 
   if (station != null) {
-    proc = spawn('omxplayer', [station]);
+    console.log(station.url);
+    proc = spawn('omxplayer', [station.url]);
     proc.stdout.on('data', function (data) {
       console.log('stdout: ${data}');
     });
@@ -41,7 +49,7 @@ function handleRequest(request, response) {
     });
 
     proc.on('close', function(code) {
-      console.log('child process exited with code ${code}');
+      console.log('child process exited');
     });
     response.writeHead(302, {Location: '/'});
     response.end();
