@@ -32,8 +32,23 @@ function handleRequest(request, response) {
     }
   }
   if (request.url == "/stop") {
-    response.writeHead(302, {Location: '/'});
-    response.end();
+    returnJson('{}', response);
+    return;
+  }
+  if (request.url == "/up") {
+    if (proc != null) {
+      proc.stdin.write("+");
+//      proc.stdin.end();
+    }
+    returnJson('{}', response);
+    return;
+  }
+  if (request.url == "/down") {
+    if (proc != null) {
+      proc.stdin.write("-");
+  //    proc.stdin.end();
+    }
+    returnJson('{}', response);
     return;
   }
 
@@ -51,11 +66,21 @@ function handleRequest(request, response) {
     proc.on('close', function(code) {
       console.log('child process exited');
     });
-    response.writeHead(302, {Location: '/'});
-    response.end();
+    returnJson('{}', response);
     return;
   }
+  if (request.url == "/radio-ui.js") {
+    response.end(fileSystem.readFileSync('radio-ui.js'));
+    return;
+  }
+
   response.end(fileSystem.readFileSync('index.html'));
+}
+
+function returnJson (json, response) {
+ console.log (json); // todo logging
+ response.writeHead (200, {'Content-Type':'application/json', 'Content-Lenght':json.length});
+ response.end (json);
 }
 
 //Create a server

@@ -1,5 +1,6 @@
 <html>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <style>
 
 html {
@@ -38,6 +39,10 @@ h1 {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  color:white;
+}
+.selected {
+  background-color:green;
 }
 body {
   background-color:#080808;
@@ -49,11 +54,12 @@ body {
 </style>
 </head>
 <body>
-<div class="container">
+ <div class="container">
 <h1>Radio</h1>
-<div class="station"><a href="/npr">Vermont Public Radio Classic</a></div>
-<div class="station"><a href="/rcan">Radio Canada Premi&egrave;re</a></div>
-<div class="station"><a href="/stop">Stop</a></div>
+<div id="npr" class="station">Vermont Public Radio Classic</div>
+<div id="rcan" class="station">Radio Canada Premi&egrave;re</div>
+<div id="stop" class="station">Stop</div>
 </div>
+<script src="radio-ui.js"></script>
 </body>
 </html>
