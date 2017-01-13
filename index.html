@@ -13,6 +13,16 @@ html {
   html { font-size: 13px; }
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 .container {
   display: flex; /* or inline-flex */
   flex-direction: column;
@@ -39,7 +49,7 @@ h1 {
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  color:white;
+  cursor: pointer;
 }
 .selected {
   background-color:green;
@@ -50,16 +60,25 @@ body {
   color: inherit;
   font-weight: 500;
   text-rendering: optimizeLegibility;
+  color:white;
+}
+.volumeup, .volumedown {
+  cursor:pointer;
+}
+.volume {
 }
 </style>
 </head>
 <body>
- <div class="container">
+<div class="container">
 <h1>Radio</h1>
-<div id="npr" class="station">Vermont Public Radio Classic</div>
-<div id="rcan" class="station">Radio Canada Premi&egrave;re</div>
-<div id="stop" class="station">Stop</div>
+<div id="npr" class="station noselect">Vermont Public Radio Classic</div>
+<div id="rcan" class="station noselect">Radio Canada Premi&egrave;re</div>
+<!-- insert new stations here -->
+<div id="stop" class="station noselect">Stop</div>
 </div>
+<div><div class="volumeup noselect">Volume Up</div><div class="volumedown noselect">Volume Down</div></div>
+<meter class="volume" min=0 max=100 value=100></meter>
 <script src="radio-ui.js"></script>
 </body>
 </html>
